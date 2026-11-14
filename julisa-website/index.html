@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Julisa Infrastructure Limited</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=Inter:wght@400;500;600&display=swap">
+<style>
+/* Layout: sticky bar, split hero (headline + logo), amber road-stripe divider, three-service strip,
+   About Julius (photo + story), services, process, project slots, testimonials, contact with WhatsApp-ready form.
+   Look: black, amber and silver taken from the Julisa logo. Single dark identity by choice. */
+:root{
+  --bg:#0A0A0B; --surface:#131316; --surface2:#1A1A1E; --line:#2A2A2F;
+  --fg:#F3F1EC; --muted:#A9A6A0; --amber:#F5A300; --amber-fg:#0A0A0B; --silver:#C9CDD3; --err:#FF7A7A;
+  --display:"Archivo","Arial Black",system-ui,sans-serif; --body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.65;margin:0;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--bg)}
+h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance;text-transform:uppercase}
+h1{font-weight:800;font-stretch:125%;font-size:clamp(2.1rem,5.8vw,4.3rem);line-height:1.02;letter-spacing:-.01em}
+h2{font-weight:800;font-stretch:118%;font-size:clamp(1.7rem,4vw,2.9rem);line-height:1.08}
+h3{font-weight:700;font-stretch:110%;font-size:1.15rem;line-height:1.2;letter-spacing:.01em}
+p{margin:0}
+a{color:inherit}
+em{font-style:normal;color:var(--amber)}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.eyebrow{font-size:.74rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--amber)}
+:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
+
+/* road stripe: the one signature flourish */
+.stripe{height:4px;background:repeating-linear-gradient(90deg,var(--amber) 0 36px,transparent 36px 60px)}
+
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--bg);border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:66px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--display);font-weight:800;font-stretch:125%;font-size:1.25rem;letter-spacing:.02em;white-space:nowrap}
+.brand i{width:0;height:0;border-left:9px solid transparent;border-right:9px solid transparent;border-bottom:15px solid var(--amber)}
+.brand small{font-family:var(--body);font-stretch:100%;font-weight:500;font-size:.68rem;letter-spacing:.2em;color:var(--silver);display:block;margin-top:-2px}
+nav ul{display:flex;gap:26px;list-style:none;margin:0;padding:0}
+nav a{text-decoration:none;font-size:.88rem;font-weight:500;color:var(--muted)}
+nav a:hover{color:var(--amber)}
+.menu-btn{display:none;font:inherit;font-size:.9rem;background:none;color:var(--fg);border:1px solid var(--line);border-radius:2px;padding:7px 14px;cursor:pointer}
+@media (max-width:900px){
+  .menu-btn{display:block}
+  nav{position:absolute;left:0;right:0;top:100%;background:var(--bg);border-bottom:1px solid var(--line);display:none}
+  nav.open{display:block}
+  nav ul{flex-direction:column;gap:0;padding:6px max(16px,env(safe-area-inset-left,0px)) 14px}
+  nav a{display:block;padding:12px 0;font-size:1rem}
+}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:inherit;font-weight:600;font-size:.95rem;text-decoration:none;cursor:pointer;
+  background:var(--amber);color:var(--amber-fg);border:1px solid var(--amber);border-radius:2px;padding:14px 26px}
+.btn:hover{filter:brightness(1.1)}
+.btn.ghost{background:transparent;color:var(--fg);border-color:var(--silver)}
+.btn.ghost:hover{border-color:var(--amber);color:var(--amber);filter:none}
+
+section{padding-block:clamp(56px,9vw,100px)}
+section.alt{background:var(--surface);border-block:1px solid var(--line)}
+.head{display:grid;gap:12px;margin-bottom:42px;max-width:680px}
+.head p{color:var(--muted)}
+
+/* hero */
+.hero{padding-block:clamp(36px,7vw,80px)}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(28px,5vw,64px);align-items:center}
+.hero .wrap > *{min-width:0}
+.hero h1{margin-top:18px}
+.hero .lead{font-size:1.12rem;color:var(--muted);max-width:520px;margin-top:22px}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.hero .logo{width:100%;height:auto;max-width:520px;justify-self:end;aspect-ratio:1;border:1px solid var(--line);border-radius:2px;display:block;object-fit:cover}
+@media (max-width:860px){.hero .wrap{grid-template-columns:1fr}.hero .logo{justify-self:center;order:-1;max-width:380px}}
+
+/* three-service strip */
+.strip{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--line)}
+.strip a{display:flex;align-items:center;gap:16px;padding:24px 20px;text-decoration:none;border-right:1px solid var(--line);min-width:0}
+.strip a:last-child{border-right:0}
+.strip a:hover{background:var(--surface)}
+.strip svg{flex:none;width:44px;height:44px;stroke:var(--amber);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.strip strong{display:block;font-family:var(--display);font-weight:700;font-stretch:112%;text-transform:uppercase;font-size:.95rem;letter-spacing:.04em}
+.strip span{font-size:.84rem;color:var(--muted)}
+@media (max-width:760px){.strip{grid-template-columns:1fr}.strip a{border-right:0;border-bottom:1px solid var(--line)}.strip a:last-child{border-bottom:0}}
+
+/* about */
+.about{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(28px,5vw,68px);align-items:start}
+.about > *{min-width:0}
+.about figure{margin:0;position:relative}
+.about img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:50% 20%;border:1px solid var(--line);border-radius:2px}
+.about figcaption{position:absolute;left:0;bottom:0;background:var(--amber);color:var(--amber-fg);padding:10px 16px;font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+.about h2{margin:12px 0 20px}
+.about p{color:var(--muted)}
+.about p+p{margin-top:14px}
+.vmv{display:grid;gap:0;margin-top:30px;border-top:1px solid var(--line)}
+.vmv div{display:grid;grid-template-columns:110px 1fr;gap:16px;padding:16px 0;border-bottom:1px solid var(--line)}
+.vmv h3{font-size:.8rem;letter-spacing:.16em;color:var(--amber);font-stretch:100%}
+.vmv p{font-size:.96rem}
+@media (max-width:860px){.about{grid-template-columns:1fr}.about figure{max-width:420px}}
+@media (max-width:480px){.vmv div{grid-template-columns:1fr;gap:4px}}
+.pending{border:1px dashed var(--silver);border-radius:2px;padding:16px 18px;margin-top:26px;font-size:.9rem;color:var(--muted);display:grid;gap:4px}
+.pending b{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--silver)}
+
+/* cards */
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media (max-width:900px){.grid3{grid-template-columns:1fr}}
+.card{background:var(--bg);border:1px solid var(--line);border-top:3px solid var(--amber);border-radius:2px;padding:28px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.card svg{width:46px;height:46px;stroke:var(--amber);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.card p{color:var(--muted);font-size:.96rem}
+.card ul{margin:4px 0 0;padding:0;list-style:none;display:grid;gap:8px;font-size:.92rem}
+.card li{padding-left:18px;position:relative;color:var(--fg)}
+.card li::before{content:"";position:absolute;left:0;top:.62em;width:8px;height:2px;background:var(--amber)}
+
+/* expertise */
+.expertise{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.expertise div{background:var(--surface);padding:24px 20px;min-width:0}
+.expertise h3{font-size:.95rem;margin-bottom:6px}
+.expertise p{font-size:.9rem;color:var(--muted)}
+@media (max-width:900px){.expertise{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.expertise{grid-template-columns:1fr}}
+
+/* process */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;list-style:none;margin:0;padding:0;counter-reset:s}
+.steps li{counter-increment:s;border-top:2px solid var(--amber);padding-top:16px;min-width:0}
+.steps li::before{content:"Step " counter(s);display:block;font-size:.72rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);margin-bottom:8px}
+.steps h3{margin-bottom:6px}
+.steps p{font-size:.92rem;color:var(--muted)}
+@media (max-width:900px){.steps{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.steps{grid-template-columns:1fr}}
+
+/* project slots + testimonials */
+.slot{border:1px dashed var(--silver);border-radius:2px;padding:26px;min-height:200px;display:flex;flex-direction:column;justify-content:flex-end;gap:8px;background:var(--bg);min-width:0}
+.slot span{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--silver);font-weight:600}
+.slot p{color:var(--muted);font-size:.92rem}
+.band{margin-top:20px;border:1px dashed var(--silver);padding:20px 24px;display:flex;flex-wrap:wrap;gap:8px 24px;align-items:center;justify-content:space-between;color:var(--muted);font-size:.92rem}
+.band strong{color:var(--fg);font-family:var(--display);text-transform:uppercase;font-stretch:112%;font-size:.95rem}
+.invite{display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--amber);padding:clamp(24px,4vw,40px)}
+.invite > *{min-width:0}
+.invite p{color:var(--muted);margin-top:10px}
+@media (max-width:760px){.invite{grid-template-columns:1fr}}
+
+/* contact */
+.contact{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(28px,5vw,64px)}
+.contact > *{min-width:0}
+.contact h2{margin:12px 0 14px}
+.contact .sub{color:var(--muted)}
+.channels{display:grid;gap:12px;margin-top:28px}
+.channel{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:14px 16px;border:1px solid var(--line);background:var(--surface);border-radius:2px}
+.channel div{min-width:0}
+.channel small{display:block;color:var(--muted);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase}
+.channel .val{font-weight:500;overflow-wrap:anywhere;user-select:all}
+.channel .acts{display:flex;gap:14px}
+.channel a,.channel button{font:inherit;font-size:.82rem;font-weight:600;color:var(--amber);background:none;border:0;cursor:pointer;text-decoration:underline;padding:4px}
+form{display:grid;gap:16px;background:var(--surface);border:1px solid var(--line);border-radius:2px;padding:clamp(20px,4vw,34px)}
+.f2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:560px){.f2{grid-template-columns:1fr}}
+label.field{display:grid;gap:6px;font-size:.85rem;font-weight:600;min-width:0}
+input[type=text],input[type=tel],select,textarea{font:inherit;font-weight:400;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:2px;padding:12px 14px;width:100%;min-width:0}
+textarea{min-height:120px;resize:vertical}
+.err{color:var(--err);font-size:.8rem;font-weight:500;min-height:1em}
+.actions{display:flex;flex-wrap:wrap;gap:12px}
+.note{font-size:.82rem;color:var(--muted)}
+@media (max-width:860px){.contact{grid-template-columns:1fr}}
+
+footer{border-top:1px solid var(--line);padding-block:32px;font-size:.86rem;color:var(--muted)}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 24px}
+.wa{position:fixed;right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:40;
+  background:#1FA855;color:#fff;font-weight:600;font-size:.9rem;text-decoration:none;padding:12px 20px;border-radius:999px;box-shadow:0 4px 14px rgba(0,0,0,.4)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#home" aria-label="Julisa Infrastructure Limited, home"><i aria-hidden="true"></i><span>JULISA<small>INFRASTRUCTURE LIMITED</small></span></a>
+    <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav id="nav" aria-label="Main">
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="home">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Julius Njuguna &middot; Founder and CEO</p>
+        <h1>Building <em>stronger roads.</em> Shaping a better tomorrow.</h1>
+        <p class="lead">Julisa Infrastructure Limited delivers earthmoving, road construction and civil works, led on every project by its founder.</p>
+        <div class="cta">
+          <a class="btn" href="#contact">Request a quote</a>
+          <a class="btn ghost" href="https://wa.me/254118933540" target="_blank" rel="noopener">Chat on WhatsApp</a>
+        </div>
+      </div>
+      <img class="logo" src="logo.jpg" width="512" height="512" alt="Julisa Infrastructure Limited logo: a road curving past an excavator, with the tagline Building Stronger Roads, Shaping a Better Tomorrow">
+    </div>
+  </section>
+  <div class="stripe" aria-hidden="true"></div>
+
+  <div class="strip">
+    <a href="#services"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="4" y="35" width="26" height="7" rx="3.5"/><rect x="8" y="23" width="14" height="12"/><path d="M22 27h6l8-15 7 6"/><path d="M43 18l-4 10h6"/></svg><div><strong>Earthmoving</strong><span>Excavation, hauling, grading</span></div></a>
+    <a href="#services"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M19 6L6 42M29 6l13 36"/><path d="M24 8v6M24 20v8M24 34v8"/></svg><div><strong>Road construction</strong><span>From road bed to surfacing</span></div></a>
+    <a href="#services"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M4 16h40"/><path d="M8 40c0-12 7-17 16-17s16 5 16 17"/><path d="M12 16v22M24 16v7M36 16v22"/></svg><div><strong>Civil works</strong><span>Culverts, drainage, bridges</span></div></a>
+  </div>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="about">
+        <figure>
+          <img src="julius.jpg" width="512" height="512" alt="Julius Njuguna in a hard hat and Julisa hi-vis vest, standing in front of a yellow wheel loader on site">
+          <figcaption>Julius Njuguna, Founder and CEO</figcaption>
+        </figure>
+        <div>
+          <p class="eyebrow">About me</p>
+          <h2>The person behind your project.</h2>
+          <p>Julius Njuguna founded Julisa Infrastructure Limited to build the roads and civil works that communities and businesses depend on. He leads the company on a simple standard: do the work properly, keep the site safe, and finish what was promised.</p>
+          <p>Clients deal directly with the person accountable for their project, from the first site visit to handover.</p>
+          <div class="vmv">
+            <div><h3>Vision</h3><p>Stronger infrastructure that carries communities and businesses forward.</p></div>
+            <div><h3>Mission</h3><p>Deliver earthmoving, road construction and civil works that are safe, durable and on schedule.</p></div>
+            <div><h3>Values</h3><p>Safety first. Quality workmanship. Reliability. Integrity.</p></div>
+          </div>
+          <div class="pending"><b>To be added</b><span>Education, professional registrations and career history for Julius Njuguna.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="alt">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">Services</p>
+        <h2>Three disciplines, one accountable team.</h2>
+        <p>Tell us the job. We assess the site, price it clearly and build it.</p>
+      </div>
+      <div class="grid3">
+        <article class="card">
+          <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="4" y="35" width="26" height="7" rx="3.5"/><rect x="8" y="23" width="14" height="12"/><path d="M22 27h6l8-15 7 6"/><path d="M43 18l-4 10h6"/></svg>
+          <h3>Earthmoving</h3>
+          <p>Heavy plant and skilled operators for moving and shaping ground.</p>
+          <ul><li>Site clearing and stripping</li><li>Bulk excavation, cut and fill</li><li>Loading, hauling and grading</li><li>Backfilling and compaction</li></ul>
+        </article>
+        <article class="card">
+          <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M19 6L6 42M29 6l13 36"/><path d="M24 8v6M24 20v8M24 34v8"/></svg>
+          <h3>Road construction</h3>
+          <p>Durable roads built on well-prepared formation with proper drainage.</p>
+          <ul><li>Road bed preparation and grading</li><li>Gravel and murram roads</li><li>Bituminous surfacing</li><li>Drainage and road furniture</li></ul>
+        </article>
+        <article class="card">
+          <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M4 16h40"/><path d="M8 40c0-12 7-17 16-17s16 5 16 17"/><path d="M12 16v22M24 16v7M36 16v22"/></svg>
+          <h3>Civil works</h3>
+          <p>Structures and drainage that keep roads and sites working.</p>
+          <ul><li>Culverts and drainage channels</li><li>Bridges and structures</li><li>Retaining walls and foundations</li><li>Site infrastructure works</li></ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="expertise">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">Areas of expertise</p>
+        <h2>What every client can expect.</h2>
+      </div>
+      <div class="expertise">
+        <div><h3>Safe sites</h3><p>Hard hats, hi-vis and site discipline on every job.</p></div>
+        <div><h3>Modern plant</h3><p>Excavators and wheel loaders operated by trained crews.</p></div>
+        <div><h3>Clear pricing</h3><p>A written scope and quote before work starts.</p></div>
+        <div><h3>On-time delivery</h3><p>Realistic programmes, tracked to handover.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="process" class="alt">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">How we work</p>
+        <h2>From first call to handover.</h2>
+      </div>
+      <ol class="steps">
+        <li><h3>Site assessment</h3><p>We visit the site, review the drawings and understand what you need built.</p></li>
+        <li><h3>Plan and quote</h3><p>You receive a clear scope, programme and price in writing.</p></li>
+        <li><h3>Build</h3><p>Crews and plant mobilise. You get regular progress updates.</p></li>
+        <li><h3>Handover</h3><p>We inspect the finished work with you and close out the job.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">Projects and achievements</p>
+        <h2>Our work on the ground.</h2>
+        <p>Completed projects will be shown here with photos, location, scope and results.</p>
+      </div>
+      <div class="grid3">
+        <div class="slot"><span>Road construction</span><p>Project photo, location and scope to be added.</p></div>
+        <div class="slot"><span>Earthmoving</span><p>Project photo, location and scope to be added.</p></div>
+        <div class="slot"><span>Civil works</span><p>Project photo, location and scope to be added.</p></div>
+      </div>
+      <div class="band"><strong>Awards and certifications</strong><span>To be added when supplied.</span></div>
+    </div>
+  </section>
+
+  <section id="testimonials" class="alt">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">Testimonials</p>
+        <h2>Client feedback.</h2>
+      </div>
+      <div class="invite">
+        <div>
+          <h3>Worked with Julisa?</h3>
+          <p>Recommendations from clients, partners and colleagues will appear here. If we built for you, send a few lines about the project.</p>
+        </div>
+        <div><a class="btn" href="#contact">Share your feedback</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="contact">
+        <div>
+          <p class="eyebrow">Contact me</p>
+          <h2>Let's talk about your project.</h2>
+          <p class="sub">Message Julius directly on WhatsApp or by email.</p>
+          <div class="channels">
+            <div class="channel"><div><small>Phone and WhatsApp</small><span class="val">0118 933 540</span></div><div class="acts"><a href="https://wa.me/254118933540" target="_blank" rel="noopener">Open chat</a><button type="button" data-copy="0118933540">Copy</button></div></div>
+            <div class="channel"><div><small>Email</small><span class="val">isaacmburu2540@gmail.com</span></div><div class="acts"><a href="mailto:isaacmburu2540@gmail.com">Write</a><button type="button" data-copy="isaacmburu2540@gmail.com">Copy</button></div></div>
+          </div>
+        </div>
+        <form id="contactForm" novalidate>
+          <div class="f2">
+            <label class="field" for="cName">Your name<input type="text" id="cName" autocomplete="name"><span class="err" id="eName"></span></label>
+            <label class="field" for="cPhone">Your phone<input type="tel" id="cPhone" autocomplete="tel"><span class="err" id="ePhone"></span></label>
+          </div>
+          <label class="field" for="cSvc">Service needed
+            <select id="cSvc"><option>Earthmoving</option><option>Road construction</option><option>Civil works</option><option>Not sure yet</option></select>
+          </label>
+          <label class="field" for="cMsg">About the project<textarea id="cMsg"></textarea><span class="err" id="eMsg"></span></label>
+          <div class="actions">
+            <a class="btn" id="sendWa" href="https://wa.me/254118933540" target="_blank" rel="noopener">Send on WhatsApp</a>
+            <a class="btn ghost" id="sendMail" href="mailto:isaacmburu2540@gmail.com">Send by email</a>
+          </div>
+          <p class="note">Your message opens in WhatsApp or your email app, ready to send.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="stripe" aria-hidden="true"></div>
+<footer>
+  <div class="wrap">
+    <span>&copy; 2026 Julisa Infrastructure Limited. All rights reserved.</span>
+    <span>Earthmoving &middot; Road construction &middot; Civil works</span>
+  </div>
+</footer>
+<a class="wa" href="https://wa.me/254118933540" target="_blank" rel="noopener">WhatsApp</a>
+
+<script>
+(function(){
+  var nav=document.getElementById("nav"),mb=document.getElementById("menuBtn");
+  mb.addEventListener("click",function(){var o=nav.classList.toggle("open");mb.setAttribute("aria-expanded",String(o))});
+  nav.addEventListener("click",function(e){if(e.target.closest("a")){nav.classList.remove("open");mb.setAttribute("aria-expanded","false")}});
+
+  function select(el){var r=document.createRange();r.selectNodeContents(el);var s=getSelection();s.removeAllRanges();s.addRange(r)}
+  document.querySelectorAll("[data-copy]").forEach(function(b){
+    b.addEventListener("click",function(){
+      var label=b.textContent,val=b.closest(".channel").querySelector(".val");
+      function done(){b.textContent="Copied";setTimeout(function(){b.textContent=label},1500)}
+      try{navigator.clipboard.writeText(b.dataset.copy).then(done,function(){select(val)})}catch(e){select(val)}
+    });
+  });
+
+  var F={n:document.getElementById("cName"),p:document.getElementById("cPhone"),s:document.getElementById("cSvc"),m:document.getElementById("cMsg")};
+  var wa=document.getElementById("sendWa"),ml=document.getElementById("sendMail");
+  function text(){
+    return "Hello Julisa Infrastructure, my name is "+F.n.value.trim()+". I need: "+F.s.value+". "+F.m.value.trim()+" My phone: "+F.p.value.trim();
+  }
+  function build(){
+    wa.href="https://wa.me/254118933540?text="+encodeURIComponent(text());
+    ml.href="mailto:isaacmburu2540@gmail.com?subject="+encodeURIComponent("Project enquiry: "+F.s.value)+"&body="+encodeURIComponent(text());
+  }
+  function valid(){
+    var ok=true;
+    var a=F.n.value.trim().length>0, b=F.p.value.replace(/\D/g,"").length>=9, c=F.m.value.trim().length>=10;
+    document.getElementById("eName").textContent=a?"":"Enter your name.";
+    document.getElementById("ePhone").textContent=b?"":"Enter a phone number we can call.";
+    document.getElementById("eMsg").textContent=c?"":"Write at least 10 characters about the project.";
+    return a&&b&&c;
+  }
+  Object.keys(F).forEach(function(k){F[k].addEventListener("input",build);F[k].addEventListener("change",build)});
+  [wa,ml].forEach(function(a){a.addEventListener("click",function(e){build();if(!valid())e.preventDefault()})});
+  build();
+})();
+</script>
+
+</body>
+</html>
